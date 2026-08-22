@@ -1,0 +1,41 @@
+name: Apply desktop enhancement
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: "!contains(github.event.head_commit.message, 'Apply desktop enhancement layer')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Attach desktop enhancement stylesheet
+        shell: bash
+        run: |
+          set -e
+          if ! grep -q 'css/style-base.css' css/style.css; then
+            printf '%s\n' '@import url("./style-base.css");' | cat - css/style.css > css/style.css.tmp
+            mv css/style.css.tmp css/style.css
+          fi
+
+      - name: Commit stylesheet attachment
+        shell: bash
+        run: |
+          set -e
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add css/style.css
+          if git diff --cached --quiet; then
+            echo 'No stylesheet change required.'
+            exit 0
+          fi
+          git commit -m 'Apply desktop enhancement layer'
+          git push
