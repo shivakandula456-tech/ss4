@@ -1,0 +1,179 @@
+/* Maitra desktop enhancement layer.
+   Loaded by css/style.css. All rules are desktop-only so the approved
+   mobile/tablet presentation remains unchanged. */
+
+@media (min-width: 1025px) {
+  .hero-overlay {
+    background:
+      linear-gradient(90deg, rgba(5,12,24,.90) 0%, rgba(5,12,24,.72) 28%, rgba(5,12,24,.34) 56%, rgba(5,12,24,.10) 100%),
+      linear-gradient(180deg, rgba(6,13,25,.34) 0%, rgba(6,13,25,.12) 50%, rgba(8,19,37,.78) 100%),
+      radial-gradient(70% 80% at 72% 34%, rgba(46,125,224,.18), transparent 62%) !important;
+  }
+
+  .hero-grid-bg { opacity: .24 !important; }
+
+  .hero-content {
+    width: min(1320px, calc(100% - 2 * clamp(36px,4vw,72px))) !important;
+    padding: 92px 0 154px !important;
+  }
+
+  /* Technical capability panel uses existing hero space without changing HTML. */
+  .hero-content::before {
+    content: "FIELD CAPABILITY  /  01";
+    position: absolute;
+    right: 0;
+    top: 42%;
+    color: var(--yellow-500);
+    font-family: var(--font-mono);
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    opacity: .92;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .hero-content::after {
+    content: "ENGINEERED FOR PERFORMANCE\A\A O&M\A EPC / EPC KEEPABILITY\A DUE DILIGENCE\A PROJECT EXECUTION";
+    white-space: pre-line;
+    position: absolute;
+    right: 0;
+    top: calc(42% + 28px);
+    width: 292px;
+    padding: 24px 25px 25px;
+    border: 1px solid rgba(255,255,255,.20);
+    border-left: 3px solid var(--yellow-500);
+    border-radius: 4px;
+    background: linear-gradient(145deg, rgba(8,19,37,.80), rgba(8,19,37,.44));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 24px 60px -30px rgba(0,0,0,.82), inset 0 1px 0 rgba(255,255,255,.08);
+    color: rgba(243,247,253,.88);
+    font-family: var(--font-mono);
+    font-size: .64rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    line-height: 1.85;
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .hero-copy {
+    width: min(760px, 62vw) !important;
+    margin-top: 54px !important;
+    margin-bottom: 28px !important;
+  }
+
+  .hero-title {
+    max-width: 760px !important;
+    margin-bottom: 22px !important;
+    font-size: clamp(4.2rem,6.05vw,6.15rem) !important;
+    line-height: .93 !important;
+    letter-spacing: -.035em !important;
+    text-shadow: 0 6px 30px rgba(0,0,0,.42);
+  }
+
+  .hero-support {
+    max-width: 640px !important;
+    margin-bottom: 30px !important;
+    font-size: clamp(1rem,1.25vw,1.12rem) !important;
+    line-height: 1.75 !important;
+    color: rgba(255,255,255,.94) !important;
+  }
+
+  .hero-actions {
+    display: flex !important;
+    align-items: center;
+    gap: 12px !important;
+    margin: 0 !important;
+  }
+
+  .hero-actions .btn {
+    min-width: 218px;
+    min-height: 50px;
+  }
+
+  .hero-kicker {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px !important;
+    font-size: .72rem !important;
+    letter-spacing: .27em !important;
+  }
+
+  .hero-kicker::after {
+    content: "";
+    display: inline-block;
+    width: 72px;
+    height: 1px;
+    background: linear-gradient(90deg,var(--yellow-500),rgba(255,196,0,0));
+  }
+
+  .site-header:not(.is-scrolled) {
+    background: linear-gradient(180deg, rgba(4,10,19,.50), transparent) !important;
+  }
+
+  .site-header:not(.is-scrolled) .brand-logo-shell {
+    box-shadow: 0 12px 30px -16px rgba(0,0,0,.78) !important;
+  }
+
+  .header-call .btn {
+    min-height: 42px;
+    padding: 10px 18px;
+    font-size: .68rem;
+  }
+
+  /* Refined bottom command dock: stronger hierarchy, same navigation. */
+  .hero-command-dock {
+    width: min(1320px,calc(100% - 2 * clamp(36px,4vw,72px))) !important;
+    bottom: 20px !important;
+    padding: 9px !important;
+    border: 1px solid rgba(255,255,255,.22) !important;
+    border-radius: 5px !important;
+    background: rgba(243,247,253,.95) !important;
+    box-shadow: 0 24px 60px -28px rgba(0,0,0,.72) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .hero-command-label {
+    padding: 4px 12px 8px !important;
+    color: var(--muted-dark) !important;
+    font-size: .56rem !important;
+    letter-spacing: .28em !important;
+  }
+
+  .hero-command-actions { min-height: 86px; }
+
+  .hero-command-item {
+    min-height: 86px !important;
+    padding: 14px 20px !important;
+    transition: background-color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+  }
+
+  .hero-command-item:hover {
+    background: rgba(230,238,248,.92) !important;
+    transform: translateY(-1px);
+  }
+
+  .hero-command-item.is-primary {
+    background: var(--yellow-500) !important;
+    box-shadow: inset 0 0 0 1px rgba(8,19,37,.05);
+  }
+
+  .hero-command-item.is-primary:hover { background: var(--yellow-400) !important; }
+  .hero-command-item strong { font-size: .82rem; letter-spacing: .02em; }
+  .hero-command-item em { font-size: .58rem; line-height: 1.4; }
+}
+
+@media (min-width:1025px) and (max-width:1240px) {
+  .hero-content::after { width: 248px; padding: 18px 18px 20px; font-size: .57rem; }
+  .hero-copy { width: min(700px,64vw) !important; }
+}
+
+@media (prefers-reduced-motion:reduce) and (min-width:1025px) {
+  .hero-command-item, .hero-actions .btn { transition: none; }
+}
