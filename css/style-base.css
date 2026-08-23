@@ -1,24 +1,26 @@
 /*
    Maitra Solar Solutions — desktop compatibility layer
 
-   Desktop-only presentation refinement. The mobile/tablet presentation is
-   intentionally left untouched. These overrides refine the desktop hero,
-   branding, typography and command dock without changing the HTML structure.
-
-   Direction:
-   - preserve the existing hero video and brand colors
-   - use a bright editorial treatment instead of a dark desktop overlay
-   - reduce headline scale and improve hierarchy
-   - give the logo a light readability plate
-   - make the bottom command dock compact and premium
+   Desktop-only presentation refinement. Mobile/tablet styles are intentionally
+   untouched. The desktop system uses a precise engineering-interface language:
+   compact brand seal, disciplined type scale, strict content grid and a thin
+   section index instead of oversized UI blocks.
 */
 
 @media (min-width: 1101px) {
   :root {
-    --desktop-gutter: clamp(44px, 5vw, 82px);
+    --desktop-gutter: clamp(44px, 5vw, 72px);
     --desktop-max: 1440px;
+    --desktop-ink: #102a43;
+    --desktop-blue: #205f9f;
+    --desktop-muted: #526b82;
+    --desktop-line: rgba(16, 42, 67, .13);
+    --desktop-paper: rgba(255,255,255,.96);
   }
 
+  /* ============================================================
+     HERO / GRID
+  ============================================================ */
   .hero {
     min-height: 100vh;
     min-height: 100svh;
@@ -32,62 +34,81 @@
     z-index: -2;
     background:
       linear-gradient(90deg,
-        rgba(248, 251, 253, 0.96) 0%,
-        rgba(248, 251, 253, 0.90) 15%,
-        rgba(248, 251, 253, 0.58) 30%,
-        rgba(248, 251, 253, 0.12) 48%,
-        rgba(248, 251, 253, 0) 66%),
+        rgba(248,251,253,.93) 0%,
+        rgba(248,251,253,.82) 16%,
+        rgba(248,251,253,.45) 34%,
+        rgba(248,251,253,.08) 52%,
+        rgba(248,251,253,0) 68%),
       linear-gradient(180deg,
-        rgba(255, 255, 255, 0.16) 0%,
-        rgba(255, 255, 255, 0) 48%,
-        rgba(7, 20, 35, 0.18) 100%);
+        rgba(255,255,255,.10) 0%,
+        rgba(255,255,255,0) 60%,
+        rgba(7,20,35,.15) 100%);
   }
 
   .hero-grid-bg {
-    opacity: 0.12;
+    opacity: .09;
     background-size: 72px 72px;
-    mask-image: linear-gradient(90deg, #000 0%, rgba(0,0,0,.55) 28%, transparent 62%);
-    -webkit-mask-image: linear-gradient(90deg, #000 0%, rgba(0,0,0,.55) 28%, transparent 62%);
+    mask-image: linear-gradient(90deg,#000 0%,rgba(0,0,0,.45) 30%,transparent 62%);
+    -webkit-mask-image: linear-gradient(90deg,#000 0%,rgba(0,0,0,.45) 30%,transparent 62%);
   }
 
   .hero-content {
     width: min(var(--desktop-max), calc(100% - 2 * var(--desktop-gutter)));
     height: 100%;
     margin: 0 auto;
-    padding: clamp(72px, 10vh, 104px) 0 154px;
+    padding: clamp(46px, 7vh, 76px) 0 112px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
   }
 
+  /* ============================================================
+     BRAND SEAL
+  ============================================================ */
   .hero-brand-row {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
-    margin-bottom: clamp(20px, 2.8vh, 30px);
+    gap: 8px;
+    margin-bottom: clamp(26px, 4vh, 38px);
   }
 
   .hero-brand {
-    width: 138px;
-    min-height: 76px;
+    position: relative;
+    width: 128px;
+    min-height: 78px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 9px 13px;
-    background: rgba(255, 255, 255, 0.97);
-    border: 1px solid rgba(10, 37, 68, 0.10);
-    border-radius: 10px;
-    box-shadow: 0 18px 40px -24px rgba(6, 24, 45, 0.48);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    padding: 10px 12px 13px;
+    background: rgba(255,255,255,.94);
+    border: 1px solid rgba(16,42,67,.18);
+    border-radius: 3px;
+    box-shadow: 0 14px 30px -22px rgba(6,24,45,.55);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+  }
+
+  .hero-brand::after {
+    content: "SOLAR SOLUTIONS";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 5px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(16,42,67,.12);
+    color: #315777;
+    font: 800 7px/1 var(--font-mono);
+    letter-spacing: .13em;
+    text-align: center;
   }
 
   .hero-brand-logo {
     width: 100%;
-    height: 100%;
+    height: 54px;
     object-fit: contain;
+    object-position: center top;
   }
 
   .hero-brand:focus-visible {
@@ -95,61 +116,71 @@
     outline-offset: 4px;
   }
 
-  /* Keep the small service descriptor with the brand instead of floating at the top-right. */
+  /* One technical descriptor. Do not duplicate a second label in the hero. */
   .hero-eyebrow {
     position: static;
     order: 2;
-    color: #205f9f;
-    font: 700 .60rem/1.2 var(--font-mono);
-    letter-spacing: .18em;
+    color: var(--desktop-blue);
+    font: 800 10px/1.2 var(--font-mono);
+    letter-spacing: .19em;
     text-transform: uppercase;
     white-space: nowrap;
   }
 
-  .hero-copy { max-width: 720px; }
+  /* ============================================================
+     HERO TYPE SCALE
+  ============================================================ */
+  .hero-copy {
+    width: min(700px, 48vw);
+    max-width: 700px;
+  }
 
   .hero-kicker {
-    margin-bottom: 10px;
-    color: #205f9f;
-    font: 800 .64rem/1.2 var(--font-mono);
-    letter-spacing: .24em;
+    margin-bottom: 11px;
+    color: var(--desktop-blue);
+    font: 800 10px/1.2 var(--font-mono);
+    letter-spacing: .22em;
     text-transform: uppercase;
   }
 
   .hero-title {
     max-width: 680px;
     margin: 0 0 18px;
-    color: #102a43 !important;
-    font-size: clamp(3.25rem, 4.05vw, 4.65rem);
+    color: var(--desktop-ink) !important;
+    font-size: clamp(3.55rem, 5vw, 5.15rem);
     font-weight: 800;
-    line-height: .96;
-    letter-spacing: -.045em;
+    line-height: .91;
+    letter-spacing: -.052em;
     text-wrap: balance;
   }
 
-  .hero-title span { color: #102a43 !important; }
+  .hero-title span { color: var(--desktop-ink) !important; }
   .hero-title .mobile-break { display: block; }
 
   .hero-support {
-    max-width: 56ch;
-    margin-bottom: 24px;
+    max-width: 52ch;
+    margin-bottom: 20px;
     color: #29415b !important;
-    font-size: clamp(.90rem, 1vw, 1.02rem);
-    line-height: 1.55;
+    font-size: clamp(.92rem, 1vw, 1.02rem);
+    line-height: 1.52;
   }
 
-  .hero-actions { gap: 10px; margin-bottom: 0; }
+  .hero-actions {
+    gap: 10px;
+    margin-bottom: 0;
+  }
 
   .hero-actions .btn {
-    min-height: 44px;
-    padding: 10px 18px;
-    font-size: .64rem;
+    min-height: 42px;
+    padding: 9px 17px;
+    font-size: 11px;
+    letter-spacing: .08em;
   }
 
   .hero-actions .btn-ghost-light {
     color: #12304f;
-    border-color: rgba(18, 48, 79, 0.22);
-    background: rgba(255, 255, 255, 0.58);
+    border-color: rgba(18,48,79,.20);
+    background: rgba(255,255,255,.56);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
@@ -157,23 +188,26 @@
   .hero-actions .btn-ghost-light:hover {
     color: #12304f;
     border-color: var(--yellow-500);
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(255,255,255,.82);
   }
 
+  /* ============================================================
+     COMMAND DOCK / SECTION INDEX
+  ============================================================ */
   .hero-command-dock {
     position: absolute;
     left: 50%;
-    bottom: clamp(16px, 2.2vh, 26px);
+    bottom: clamp(16px, 2.2vh, 24px);
     transform: translateX(-50%);
     z-index: 5;
-    width: min(1180px, calc(100% - 2 * var(--desktop-gutter)));
+    width: min(1120px, calc(100% - 2 * var(--desktop-gutter)));
     padding: 0;
-    border: 1px solid rgba(17, 45, 76, 0.13);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 22px 52px -30px rgba(7, 29, 51, 0.42);
-    backdrop-filter: blur(16px) saturate(125%);
-    -webkit-backdrop-filter: blur(16px) saturate(125%);
+    border: 1px solid var(--desktop-line);
+    border-radius: 3px;
+    background: var(--desktop-paper);
+    box-shadow: 0 16px 38px -30px rgba(7,29,51,.55);
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
     overflow: hidden;
   }
 
@@ -181,22 +215,22 @@
 
   .hero-command-actions {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(5,minmax(0,1fr));
   }
 
   .hero-command-item {
-    min-height: 72px;
-    padding: 11px 17px;
+    min-height: 60px;
+    padding: 8px 14px;
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto;
-    column-gap: 9px;
+    column-gap: 8px;
     align-content: center;
     text-align: left;
     color: #17324f;
-    border-right: 1px solid rgba(17, 45, 76, 0.10);
-    background: rgba(255, 255, 255, 0.70);
-    transition: background-color .28s var(--ease), color .28s var(--ease), transform .28s var(--ease);
+    border-right: 1px solid var(--desktop-line);
+    background: rgba(255,255,255,.72);
+    transition: background-color .24s var(--ease),color .24s var(--ease),transform .24s var(--ease);
   }
 
   .hero-command-item:last-child { border-right: 0; }
@@ -204,28 +238,29 @@
   .hero-command-item span {
     grid-row: 1 / span 2;
     align-self: center;
-    color: #5b7a99;
-    font: 800 .54rem/1 var(--font-mono);
-    letter-spacing: .08em;
+    color: #6a839a;
+    font: 800 9px/1 var(--font-mono);
+    letter-spacing: .06em;
   }
 
   .hero-command-item strong {
-    font: 800 .66rem/1.2 var(--font-mono);
-    letter-spacing: .11em;
+    font: 800 11px/1.15 var(--font-mono);
+    letter-spacing: .08em;
     text-transform: uppercase;
   }
 
   .hero-command-item em {
-    margin-top: 4px;
-    color: #6b7f93;
-    font: 500 .57rem/1.25 var(--font-mono);
+    margin-top: 3px;
+    color: #718497;
+    font: 500 8px/1.2 var(--font-mono);
     font-style: normal;
+    letter-spacing: .04em;
     white-space: nowrap;
   }
 
   .hero-command-item:hover {
     color: #102f4f;
-    background: rgba(248, 250, 252, 0.98);
+    background: #f8fafc;
     transform: translateY(-1px);
   }
 
@@ -235,46 +270,78 @@
   .hero-command-item.is-primary {
     color: #10263e;
     background: var(--yellow-500);
-    box-shadow: inset 0 3px 0 rgba(255,255,255,.28);
+    box-shadow: inset 0 2px 0 rgba(255,255,255,.30);
   }
 
   .hero-command-item.is-primary span,
-  .hero-command-item.is-primary em { color: rgba(16, 38, 62, 0.68); }
+  .hero-command-item.is-primary em { color: rgba(16,38,62,.66); }
   .hero-command-item.is-primary:hover { background: var(--yellow-400); }
 
-  .hero-scrollcue { color: rgba(20, 47, 73, 0.62); bottom: 104px; }
+  /* ============================================================
+     DESKTOP TYPOGRAPHY RHYTHM FOR FOLLOWING SECTIONS
+     Keep mobile/tablet typography exactly as authored elsewhere.
+  ============================================================ */
+  .section-head .eyebrow,
+  .section-head .eyebrow-light {
+    font-size: 10px;
+    line-height: 1.2;
+    letter-spacing: .20em;
+  }
+
+  .section-head .section-title {
+    font-size: clamp(2.65rem, 3.5vw, 4rem);
+    line-height: .96;
+    letter-spacing: -.04em;
+  }
+
+  .section-head .section-sub {
+    max-width: 58ch;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .hero-scrollcue {
+    color: rgba(20,47,73,.58);
+    bottom: 84px;
+  }
 }
 
 @media (min-width: 1101px) and (max-height: 760px) {
   .hero-content {
-    padding-top: 58px;
-    padding-bottom: 138px;
+    padding-top: 38px;
+    padding-bottom: 100px;
   }
+
+  .hero-brand-row { margin-bottom: 22px; }
 
   .hero-brand {
-    width: 124px;
-    min-height: 68px;
+    width: 116px;
+    min-height: 70px;
+    padding-top: 8px;
   }
 
-  .hero-brand-row { margin-bottom: 16px; gap: 8px; }
-  .hero-eyebrow { font-size: .56rem; }
-  .hero-kicker { margin-bottom: 8px; font-size: .60rem; }
+  .hero-brand-logo { height: 48px; }
+  .hero-brand::after { font-size: 6.5px; }
+  .hero-eyebrow { font-size: 9px; }
+  .hero-kicker { margin-bottom: 8px; }
 
   .hero-title {
-    font-size: clamp(2.85rem, 3.75vw, 4.05rem);
-    line-height: .95;
-    margin-bottom: 14px;
+    font-size: clamp(3.05rem, 4.45vw, 4.35rem);
+    line-height: .92;
+    margin-bottom: 13px;
   }
 
   .hero-support {
-    margin-bottom: 16px;
+    margin-bottom: 15px;
     font-size: .88rem;
   }
 
   .hero-command-item {
-    min-height: 64px;
-    padding-block: 9px;
+    min-height: 56px;
+    padding-block: 7px;
   }
 
+  .hero-command-item strong { font-size: 10px; }
+  .hero-command-item em { font-size: 7.5px; }
   .hero-scrollcue { display: none; }
 }
